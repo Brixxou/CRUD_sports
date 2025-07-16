@@ -1,4 +1,3 @@
-// backend/prisma/schema.prisma
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
@@ -7,6 +6,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
 model Session {
   id          Int      @id @default(autoincrement())
   sport       String

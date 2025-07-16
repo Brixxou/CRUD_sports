@@ -1,53 +1,64 @@
-const prisma = require('./prismaClient');
 const express = require('express');
+const cors = require('cors');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
 const app = express();
-
-const PORT = process.env.PORT || 3000;
-// backend/index.js (exemple)
-
+app.use(cors());
 app.use(express.json());
 
-// CRUD Sessions avec Prisma
-
-// Get all
+// ➡️ GET all sessions
 app.get('/api/sessions', async (req, res) => {
   const sessions = await prisma.session.findMany();
   res.json(sessions);
 });
 
-// Get by ID
+// ➡️ GET one session by id
 app.get('/api/sessions/:id', async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = Number(req.params.id);
   const session = await prisma.session.findUnique({ where: { id } });
   if (!session) return res.status(404).json({ message: 'Not found' });
   res.json(session);
 });
 
-// Create
+// ➡️ POST create session
 app.post('/api/sessions', async (req, res) => {
   const { sport, date, duree, description } = req.body;
-  const newSession = await prisma.session.create({
-    data: { sport, date: new Date(date), duree: Number(duree), description },
-  });
-  res.status(201).json(newSession);
+  try {
+    const newSession = await prisma.session.create({
+      data: { sport, date: new Date(date), duree: Number(duree), description },
+    });
+    res.status(201).json(newSession);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
-// Update
+// ➡️ PUT update session
 app.put('/api/sessions/:id', async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = Number(req.params.id);
   const { sport, date, duree, description } = req.body;
-  const updated = await prisma.session.update({
-    where: { id },
-    data: { sport, date: new Date(date), duree: Number(duree), description },
-  });
-  res.json(updated);
+  try {
+    const updated = await prisma.session.update({
+      where: { id },
+      data: { sport, date: new Date(date), duree: Number(duree), description },
+    });
+    res.json(updated);
+  } catch (e) {
+    res.status(404).json({ error: e.message });
+  }
 });
 
-// Delete
+// ➡️ DELETE session
 app.delete('/api/sessions/:id', async (req, res) => {
-  const id = parseInt(req.params.id);
-  await prisma.session.delete({ where: { id } });
-  res.status(204).end();
+  const id = Number(req.params.id);
+  try {
+    await prisma.session.delete({ where: { id } });
+    res.status(204).end();
+  } catch (e) {
+    res.status(404).json({ error: e.message });
+  }
 });
 
-app.listen(3000, () => console.log('API sur http://localhost:3000'));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`API CRUD_sports sur http://localhost:${PORT}`));
