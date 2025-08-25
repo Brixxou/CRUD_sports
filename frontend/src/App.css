@@ -202,3 +202,102 @@ body{
 
 /* Error text */
 .err{ color: #fda4af; font-weight: 600; }
+
+/* ===== reset overflow horizontal ===== */
+html, body {
+  overflow-x: hidden; /* évite la barre de scroll horizontale */
+}
+#root, .app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== topbar avec titre centré ===== */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  background: rgba(10,18,35,0.55);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+.brand{
+  margin: 0;
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== toolbar (actions sous le titre) ===== */
+.toolbar{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 10px 16px 0 16px;
+}
+
+/* ===== zone principale : prend le reste de l’écran ===== */
+.main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 16px;
+}
+
+/* La table scrolle à l’intérieur si elle est grande,
+   au lieu de faire scroller toute la page */
+.scroll-area{
+  max-height: calc(100vh - 210px); /* ajuste si besoin */
+  overflow: auto;
+}
+
+/* ===== Splash screen ===== */
+.splash{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(1200px 800px at 80% -10%, #153269 0%, #0a1223 45%, var(--bg) 100%);
+  animation: fadeIn .5s ease forwards;
+  opacity: 0;
+}
+.splash.in{ opacity: 1; }
+
+.brand-big{
+  font-size: clamp(48px, 8vw, 96px);
+  margin: 0 0 20px 0;
+  letter-spacing: 2px;
+  font-weight: 900;
+  text-transform: lowercase;
+  background: linear-gradient(90deg, #ffffff, #93c5fd, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: popIn .7s cubic-bezier(.2,.9,.2,1) both;
+}
+
+.splash-btn{
+  transform: translateY(6px);
+  animation: rise .6s .15s ease both;
+}
+
+@keyframes fadeIn {
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+@keyframes popIn {
+  0% { transform: translateY(12px) scale(.96); opacity: 0; }
+  60% { transform: translateY(-2px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(6px); }
+}
