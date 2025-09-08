@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"   # host 3000 -> container 80 (nginx)
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: "file:/app/prisma/dev.db"
+      PORT: 3001
+    ports:
+      - "3001:3001" # host 3001 -> container 3001
+    volumes:
+      - ./backend/prisma/dev.db:/app/prisma/dev.db
+      

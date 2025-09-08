@@ -141,4 +141,13 @@ app.post('/api/sessions/bulk-delete', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3001;
+// Basic root and health endpoints to make the service friendly when visited directly
+app.get('/', (req, res) => {
+  return res.send('API CRUD_sports: OK');
+});
+
+app.get('/health', (req, res) => {
+  return res.json({ status: 'ok' });
+});
+
 app.listen(PORT, () => console.log(`API CRUD_sports sur http://localhost:${PORT}`));
