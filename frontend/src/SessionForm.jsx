@@ -33,16 +33,16 @@ export default function SessionForm({ onCreated }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 style={{marginTop:0}}>Ajouter une séance</h3>
+      <h3 style={{marginTop:0}}>Nouvelle séance</h3>
 
       <div className="form-row">
-        <input className="input" placeholder="Sport (Running, Muscu…)" value={sport} onChange={(e)=>setSport(e.target.value)} required />
+        <input className="input" placeholder="Sport" value={sport} onChange={(e)=>setSport(e.target.value)} required />
         <input className="input" type="datetime-local" value={date} onChange={(e)=>setDate(e.target.value)} required />
         <input className="input" type="number" min="1" placeholder="Durée (min)" value={duree} onChange={(e)=>setDuree(e.target.value)} required />
       </div>
 
       <div style={{marginTop:10}}>
-        <textarea className="textarea" placeholder="Description (optionnel)" value={description} onChange={(e)=>setDescription(e.target.value)} />
+        <textarea className="textarea" placeholder="Description" value={description} onChange={(e)=>setDescription(e.target.value)} />
       </div>
 
       <div className="hstack" style={{marginTop:10}}>

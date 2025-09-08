@@ -1,8 +1,12 @@
-/* ========= Variables & Base ========= */
-:root{
-  --bg: #0f172a;            /* slate-900 */
-  --panel: #111827;         /* gray-900 */
-  --muted: #1f2937;         /* gray-800 */
+:root {
+  --bg-dark: #1a1a1a;
+  --bg-darker: #242424;
+  --text-light: #fff;
+  --text-dim: #999;
+  --border-color: #333;
+  --accent-color: #4361ee;
+  --max-width: 1200px;
+  --content-padding: 2rem;
   --card: #0b1222;          /* custom dark blue-ish */
   --text: #e5e7eb;          /* gray-200 */
   --text-dim: #a1a1aa;      /* zinc-400 */
@@ -28,7 +32,37 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========= Layout ========= */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.App {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--content-padding);
+}
+
+.topbar {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--bg-darker);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.brand {
+  margin: 0;
+  color: var(--accent-color);
+  font-size: 2rem;
+}
+
+.sessions-container {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
 .container{
   max-width: 1100px;
   margin: 28px auto;
@@ -230,6 +264,7 @@ html, body {
   font-size: 28px;
   font-weight: 800;
   background: linear-gradient(90deg, #fff, #93c5fd);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -279,6 +314,7 @@ html, body {
   text-transform: lowercase;
   background: linear-gradient(90deg, #ffffff, #93c5fd, #3b82f6);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: popIn .7s cubic-bezier(.2,.9,.2,1) both;
 }

@@ -1,0 +1,11 @@
+{
+  "name": "crud_sports",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently --kill-others \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
